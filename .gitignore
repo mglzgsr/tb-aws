@@ -7,4 +7,4 @@ terraform/outputs.tf
 terraform/variables.tf
 .vscode/settings.json
 /.idea/*
-
+.terraform.lock.hcl
