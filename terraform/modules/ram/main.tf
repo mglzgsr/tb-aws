@@ -1,9 +1,9 @@
 resource "aws_ram_resource_share" "aws_lz_ram_shared" {
   count = length(var.ram_name) > 0 ? 1 : 0
 
-  name   = var.ram_name
+  name                      = var.ram_name
   allow_external_principals = var.ram_allow_external_principals
-  tags = var.ram_tags
+  tags                      = var.ram_tags
 
 }
 
@@ -19,7 +19,7 @@ resource "aws_ram_resource_association" "aws_lz_ram_association" {
 resource "aws_ram_principal_association" "aws_lz_ram_principal_association" {
   count = length(var.ram_principals) > 0 ? length(var.ram_principals) : 0
 
-  principal = var.ram_principals
+  principal          = var.ram_principals
   resource_share_arn = aws_ram_resource_share.aws_lz_ram_shared[0].arn
 
   depends_on = [aws_ram_resource_association.aws_lz_ram_association]

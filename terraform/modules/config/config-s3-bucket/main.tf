@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "s3_main" {
   versioning {
     enabled = var.versioning_enabled
   }
-  
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "s3_log" {
   versioning {
     enabled = var.versioning_enabled
   }
-  
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -39,8 +39,8 @@ resource "aws_s3_bucket" "s3_log" {
 }
 
 resource "aws_s3_bucket_policy" "aws_lz_s3_bucket_policy" {
-  count   = length(var.bucket_name_log) > 0 ? 1 : 0
+  count = length(var.bucket_name_log) > 0 ? 1 : 0
 
-  bucket   = aws_s3_bucket.s3_log.id
+  bucket = aws_s3_bucket.s3_log.id
   policy = data.template_file.logarchive_bucket_policy.rendered
 }

@@ -24,7 +24,7 @@ data "template_file" "aws_config_acm_certificate_expiration" {
 }
 
 data "template_file" "aws_config_ami_approved_tag" {
-  template = "${file("${path.module}/config-policies/ami-approved-tag.tpl")}"
+  template = file("${path.module}/config-policies/ami-approved-tag.tpl")
 
   vars = {
     ami_required_tag_key_value = var.ami_required_tag_key_value
@@ -48,7 +48,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [var.recorder_main,var.delivery_channel]
+  depends_on = [var.recorder_main, var.delivery_channel]
 }
 
 resource "aws_config_config_rule" "cloudtrail-enabled" {
@@ -120,7 +120,7 @@ resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
   depends_on = [
     var.recorder_main,
     var.delivery_channel,
-  ]  
+  ]
 }
 
 resource "aws_config_config_rule" "instances-in-vpc" {
@@ -137,7 +137,7 @@ resource "aws_config_config_rule" "instances-in-vpc" {
     var.recorder_main,
     var.delivery_channel,
   ]
-  
+
 }
 
 resource "aws_config_config_rule" "root-account-mfa-enabled" {
@@ -156,7 +156,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
     var.recorder_main,
     var.delivery_channel,
   ]
-  
+
 }
 
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
@@ -173,7 +173,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
   maximum_execution_frequency = var.config_max_execution_frequency
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "ec2-volume-inuse-check" {
@@ -187,7 +187,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "iam-user-no-policies-check" {
@@ -201,7 +201,7 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "iam-group-has-users-check" {
@@ -215,7 +215,7 @@ resource "aws_config_config_rule" "iam-group-has-users-check" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "rds-storage-encrypted" {
@@ -229,7 +229,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "rds-instance-public-access-check" {
@@ -243,7 +243,7 @@ resource "aws_config_config_rule" "rds-instance-public-access-check" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
@@ -257,7 +257,7 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "guardduty-enabled-centralized" {
@@ -273,7 +273,7 @@ resource "aws_config_config_rule" "guardduty-enabled-centralized" {
   maximum_execution_frequency = var.config_max_execution_frequency
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
@@ -287,7 +287,7 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "eip_attached" {
@@ -301,7 +301,7 @@ resource "aws_config_config_rule" "eip_attached" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "required-tags" {
@@ -321,7 +321,7 @@ resource "aws_config_config_rule" "required-tags" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "approved-amis-by-tag" {
@@ -336,7 +336,7 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }
 
 resource "aws_config_config_rule" "ec2-encrypted-volumes" {
@@ -350,5 +350,5 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
   }
 
   depends_on = [var.recorder_main]
-  
+
 }

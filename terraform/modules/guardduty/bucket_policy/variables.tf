@@ -1,17 +1,17 @@
 variable "bucket_name" {
-    type = string
-    default = ""
+  type    = string
+  default = ""
 }
 variable "policy" {
-    type = string
-    default = ""
+  type    = string
+  default = ""
 }
 variable "policy_description" {
-    type = string
-    default = ""
+  type    = string
+  default = ""
 }
 
 variable "bucket_arn" {
-    type = string
-    default = ""
+  type    = string
+  default = ""
 }

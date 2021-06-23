@@ -35,9 +35,9 @@ module "aws_lz_config_service" {
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   s3_log_prefix      = module.aws_lz_config_bucket.s3_log_prefix
   #account_id         = local.sandbox_account_id
-  sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
+  sns_topic_arn = module.aws_lz_config_sns_topic.topic_arn
   #account_role_name  = var.org_admin_role
-  config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
 
 module "aws_lz_config_service_2" {
@@ -51,9 +51,9 @@ module "aws_lz_config_service_2" {
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   s3_log_prefix      = module.aws_lz_config_bucket.s3_log_prefix
   #account_id   = local.sandbox2_account_id
-  sns_topic_arn      = module.aws_lz_config_sns_topic_2.topic_arn
+  sns_topic_arn = module.aws_lz_config_sns_topic_2.topic_arn
   #account_role_name  = var.org_admin_role
-  config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "config" }
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "config" }
 }
 
 ############################
@@ -81,7 +81,7 @@ module "aws_lz_config_aggregator" {
 */
 ############################################
 module "aws_lz_config_rules" {
-  source  = "./modules/config/config-rules"
+  source = "./modules/config/config-rules"
 
   providers = {
     aws = aws.sandbox-account
@@ -92,7 +92,7 @@ module "aws_lz_config_rules" {
 }
 
 module "aws_lz_config_rules_2" {
-  source  = "./modules/config/config-rules"
+  source = "./modules/config/config-rules"
 
   providers = {
     aws = aws.sandbox-account-2
@@ -137,14 +137,14 @@ module "aws_lz_cloudtrail" {
     aws = aws.sandbox-account
   }
 
-  cloudtrail_name = var.cloudtrail_name
-  bucket_name = module.aws_lz_config_bucket.bucket_name_log
-  s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
-  bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
+  cloudtrail_name   = var.cloudtrail_name
+  bucket_name       = module.aws_lz_config_bucket.bucket_name_log
+  s3_log_prefix     = module.aws_lz_config_bucket.s3_log_prefix
+  bucket_arn        = module.aws_lz_config_bucket.bucket_log_arn
   bucket_account_id = local.sandbox_account_id
-  sns_topic_arn = module.aws_lz_cloudtrail_sns_topic.topic_arn
-  region = local.region
-  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
+  sns_topic_arn     = module.aws_lz_cloudtrail_sns_topic.topic_arn
+  region            = local.region
+  required_tags     = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
 
 module "aws_lz_cloudtrail_2" {
@@ -154,14 +154,14 @@ module "aws_lz_cloudtrail_2" {
     aws = aws.sandbox-account-2
   }
 
-  cloudtrail_name = var.cloudtrail_name
-  bucket_name = module.aws_lz_config_bucket.bucket_name_log
-  s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
-  bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
+  cloudtrail_name   = var.cloudtrail_name
+  bucket_name       = module.aws_lz_config_bucket.bucket_name_log
+  s3_log_prefix     = module.aws_lz_config_bucket.s3_log_prefix
+  bucket_arn        = module.aws_lz_config_bucket.bucket_log_arn
   bucket_account_id = local.sandbox2_account_id
-  sns_topic_arn = module.aws_lz_cloudtrail_sns_topic_2.topic_arn
-  region = local.region
-  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "cloudtrail" }
+  sns_topic_arn     = module.aws_lz_cloudtrail_sns_topic_2.topic_arn
+  region            = local.region
+  required_tags     = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "cloudtrail" }
 }
 
 ### CLOUDTRAIL SERVICE <--
@@ -170,15 +170,15 @@ module "aws_lz_cloudtrail_2" {
 /*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
 
 module "vpc_sandbox" {
-  source  = "terraform-aws-modules/vpc/aws"
+  source = "terraform-aws-modules/vpc/aws"
   providers = {
     aws = aws.sandbox-account
   }
-  name = var.vpc_sandbox_1_name
-  cidr = var.vpc_sandbox_1_cidr
+  name            = var.vpc_sandbox_1_name
+  cidr            = var.vpc_sandbox_1_cidr
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_1_private_subnets_cidr
-  public_subnets  =  var.vpc_sandbox_1_public_subnets_cidr
+  public_subnets  = var.vpc_sandbox_1_public_subnets_cidr
 
   enable_nat_gateway = var.enable_nat_gateway
   enable_vpn_gateway = var.enable_vpn_gateway
@@ -187,13 +187,13 @@ module "vpc_sandbox" {
 }
 
 module "vpc_sandbox_2" {
-  source  = "terraform-aws-modules/vpc/aws"
+  source = "terraform-aws-modules/vpc/aws"
   providers = {
     aws = aws.sandbox-account-2
   }
-  
-  name = var.vpc_sandbox_2_name
-  cidr = var.vpc_sandbox_2_cidr
+
+  name            = var.vpc_sandbox_2_name
+  cidr            = var.vpc_sandbox_2_cidr
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_2_private_subnets_cidr
   public_subnets  = var.vpc_sandbox_2_public_subnets_cidr
@@ -207,71 +207,71 @@ module "vpc_sandbox_2" {
 ### VPC-TGW attachment
 
 module "vpc_sandbox_twg_attachment" {
-  source  = "./modules/transit-gateway/tgw-vpc-attachment"
+  source = "./modules/transit-gateway/tgw-vpc-attachment"
 
   providers = {
     aws = aws.sandbox-account
   }
 
-  attach_name = format("aws_lz_sandbox_vpc_attach_%s",local.sandbox_account_id)
-  subnets_ids = module.vpc_sandbox.private_subnets
-  vpc_id = module.vpc_sandbox.vpc_id
+  attach_name        = format("aws_lz_sandbox_vpc_attach_%s", local.sandbox_account_id)
+  subnets_ids        = module.vpc_sandbox.private_subnets
+  vpc_id             = module.vpc_sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
-} 
+  tags               = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
+}
 
 module "vpc_sandbox_2_twg_attachment" {
-  source  = "./modules/transit-gateway/tgw-vpc-attachment"
+  source = "./modules/transit-gateway/tgw-vpc-attachment"
   providers = {
     aws = aws.sandbox-account-2
   }
 
-  attach_name = format("aws_lz_sandbox2_vpc_attach_%s",local.sandbox2_account_id)
-  subnets_ids =  module.vpc_sandbox_2.private_subnets
-  vpc_id = module.vpc_sandbox_2.vpc_id
+  attach_name        = format("aws_lz_sandbox2_vpc_attach_%s", local.sandbox2_account_id)
+  subnets_ids        = module.vpc_sandbox_2.private_subnets
+  vpc_id             = module.vpc_sandbox_2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
+  tags               = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
 }
 #<---
 
 #Routes
-module "internet_route_sandbox"{
-  source  = "./modules/route"
+module "internet_route_sandbox" {
+  source = "./modules/route"
   providers = {
     aws = aws.sandbox-account
   }
-  route_table = module.vpc_sandbox.private_route_table_ids
-  destination = var.internet_cidr
+  route_table     = module.vpc_sandbox.private_route_table_ids
+  destination     = var.internet_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 
-module "internal_route_sandbox"{
-  source  = "./modules/route"
+module "internal_route_sandbox" {
+  source = "./modules/route"
   providers = {
     aws = aws.sandbox-account
   }
-  route_table = module.vpc_sandbox.private_route_table_ids
-  destination = var.internal_traffic_cidr
+  route_table     = module.vpc_sandbox.private_route_table_ids
+  destination     = var.internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 
-module "internet_route_sandbox_2"{
-  source  = "./modules/route"
+module "internet_route_sandbox_2" {
+  source = "./modules/route"
   providers = {
     aws = aws.sandbox-account-2
   }
-  route_table = module.vpc_sandbox_2.private_route_table_ids
-  destination = var.internet_cidr
+  route_table     = module.vpc_sandbox_2.private_route_table_ids
+  destination     = var.internet_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 
-module "internal_route_sandbox_2"{
-  source  = "./modules/route"
+module "internal_route_sandbox_2" {
+  source = "./modules/route"
   providers = {
     aws = aws.sandbox-account-2
   }
-  route_table = module.vpc_sandbox_2.private_route_table_ids
-  destination = var.internal_traffic_cidr
+  route_table     = module.vpc_sandbox_2.private_route_table_ids
+  destination     = var.internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 

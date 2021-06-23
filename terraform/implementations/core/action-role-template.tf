@@ -52,74 +52,74 @@ data "aws_iam_policy_document" "aws_lz_assume_role_network" {
 }
 */
 
-data "aws_iam_policy_document" "aws_lz_role_policy_security"{
-    statement {
-        actions = [
-            "iam:CreateRole"
-        ]
-        resources = [
-            "arn:aws:iam:::*",
-            ]
-    }
-    statement {
-            actions = [
-                "sns:CreateTopic",
-                "sns:SetTopicAttributes",
-                "sns:Subscribe",
-                "sns:GetTopicAttributes",
-            ]
-            resources = [
-                "arn:aws:sns:::*",
-            ]
-        
-    } 
+data "aws_iam_policy_document" "aws_lz_role_policy_security" {
+  statement {
+    actions = [
+      "iam:CreateRole"
+    ]
+    resources = [
+      "arn:aws:iam:::*",
+    ]
+  }
+  statement {
+    actions = [
+      "sns:CreateTopic",
+      "sns:SetTopicAttributes",
+      "sns:Subscribe",
+      "sns:GetTopicAttributes",
+    ]
+    resources = [
+      "arn:aws:sns:::*",
+    ]
+
+  }
 }
 
-data "aws_iam_policy_document" "aws_lz_role_policy_logarchive"{
-    statement {
-        actions = [
-            "s3:CreateBucket",
-            "s3:PutBucketPolicy",
-            
-        ]
-        resources = [
-            "arn:aws:s3:::*",
-            ]
-    }
+data "aws_iam_policy_document" "aws_lz_role_policy_logarchive" {
+  statement {
+    actions = [
+      "s3:CreateBucket",
+      "s3:PutBucketPolicy",
+
+    ]
+    resources = [
+      "arn:aws:s3:::*",
+    ]
+  }
 }
 
-data "aws_iam_policy_document" "aws_lz_role_policy_sharedservices"{
-    statement {
-        actions = [
-            "s3:ListAllMyBuckets",
-            "s3:GetBucketLocation",
-        ]
-        resources = [
-            "arn:aws:s3:::*",
-            ]
-    }
-    statement {
-            actions = [
-                "s3:ListAllMyBuckets",
-                "s3:GetBucketLocation",
-            ]
-            resources = [
-                "arn:aws:s3:::*",
-            ]
-        
-    }    
+data "aws_iam_policy_document" "aws_lz_role_policy_sharedservices" {
+  statement {
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+    ]
+    resources = [
+      "arn:aws:s3:::*",
+    ]
+  }
+  statement {
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+    ]
+    resources = [
+      "arn:aws:s3:::*",
+    ]
+
+  }
 }
 
-data "aws_iam_policy_document" "aws_lz_role_policy_network"{
-    statement {
-        actions = [
-            "s3:ListAllMyBuckets",
-            "s3:GetBucketLocation",
-        ]
-        resources = [
-            "arn:aws:s3:::*",
-            ]
-    }
+data "aws_iam_policy_document" "aws_lz_role_policy_network" {
+  statement {
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+    ]
+    resources = [
+      "arn:aws:s3:::*",
+    ]
+  }
 }
 
 /*

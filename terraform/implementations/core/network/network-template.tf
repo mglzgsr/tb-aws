@@ -7,22 +7,22 @@ module "aws_lz_tgw" {
     aws = aws.network-account
   }
 
-  name            = format("aws_lz_tgw_%s",local.network_account_id)
+  name            = format("aws_lz_tgw_%s", local.network_account_id)
   description     = "AWS Landing Zone TGW shared with several other AWS accounts"
   amazon_side_asn = 64599
 
   enable_auto_accept_shared_attachments = true
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  tags                                  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
 module "aws_lz_aws_ram_share_tg" {
   source = "./modules/ram"
 
-  ram_name = "AWS_LZ_TG"
+  ram_name                      = "AWS_LZ_TG"
   ram_allow_external_principals = false
-  ram_resource_arn = module.aws_lz_tgw.tgw_arn
-  ram_principals =  module.aws_lz_organization_main.org_arn
-  ram_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "aws-ram-tg" }
+  ram_resource_arn              = module.aws_lz_tgw.tgw_arn
+  ram_principals                = module.aws_lz_organization_main.org_arn
+  ram_tags                      = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "aws-ram-tg" }
 
   providers = {
     aws = aws.network-account
@@ -45,8 +45,8 @@ module "aws_lz_egress_vpc" {
   public_subnets  = ["10.99.0.0/24", "10.99.1.0/24"]
   private_subnets = ["10.99.2.0/24", "10.99.3.0/24"]
 
-  enable_nat_gateway = true
-  single_nat_gateway = false
+  enable_nat_gateway     = true
+  single_nat_gateway     = false
   one_nat_gateway_per_az = true
   #enable_vpn_gateway = true
 
@@ -54,17 +54,17 @@ module "aws_lz_egress_vpc" {
 }
 
 module "aws_lz_egress_vpc_twg_attachment" {
-  source  = "./modules/transit-gateway/tgw-vpc-attachment"
+  source = "./modules/transit-gateway/tgw-vpc-attachment"
 
   providers = {
     aws = aws.network-account
   }
 
-  attach_name = format("aws_lz_egress_vpc_attach_%s",local.network_account_id)
+  attach_name        = format("aws_lz_egress_vpc_attach_%s", local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  vpc_id = module.aws_lz_egress_vpc.vpc_id
-  subnets_ids =  module.aws_lz_egress_vpc.private_subnets
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  vpc_id             = module.aws_lz_egress_vpc.vpc_id
+  subnets_ids        = module.aws_lz_egress_vpc.private_subnets
+  tags               = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
 module "aws_lz_tgw_route" {
@@ -75,6 +75,6 @@ module "aws_lz_tgw_route" {
   }
 
   destination_cidr_block = "0.0.0.0/0"
-  tgw_id = module.aws_lz_tgw.tgw_id
-  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+  tgw_id                 = module.aws_lz_tgw.tgw_id
+  attach_id              = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }

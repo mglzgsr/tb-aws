@@ -38,6 +38,6 @@ data "template_file" "logarchive_bucket_policy" {
 JSON
 
   vars = {
-    config_resource = format("%s/%s/AWSLogs/*/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix)
+    config_resource = format("%s/%s/AWSLogs/*/*", aws_s3_bucket.s3_log.arn, var.s3_log_prefix)
   }
 }

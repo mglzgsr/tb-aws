@@ -1,33 +1,33 @@
 resource "aws_cloudtrail" "cloudtrail_default" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
-  name                       = var.cloudtrail_name
-  is_multi_region_trail      = var.multi_region_trail
+  name                          = var.cloudtrail_name
+  is_multi_region_trail         = var.multi_region_trail
   include_global_service_events = var.include_global_events
-  is_organization_trail      = var.organization_trail
-  s3_bucket_name             = var.bucket_name
-  s3_key_prefix              = var.s3_log_prefix
-  enable_logging             = var.enable_logging
-  enable_log_file_validation = var.enable_log_file_validation
-  sns_topic_name             = aws_sns_topic.cloudtrail[count.index].name
-  cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default[count.index].arn
-  cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role[count.index].arn
-  tags                       = var.required_tags
+  is_organization_trail         = var.organization_trail
+  s3_bucket_name                = var.bucket_name
+  s3_key_prefix                 = var.s3_log_prefix
+  enable_logging                = var.enable_logging
+  enable_log_file_validation    = var.enable_log_file_validation
+  sns_topic_name                = aws_sns_topic.cloudtrail[count.index].name
+  cloud_watch_logs_group_arn    = aws_cloudwatch_log_group.log_group_default[count.index].arn
+  cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_role[count.index].arn
+  tags                          = var.required_tags
 }
 
 resource "aws_sns_topic_policy" "sns_default_policy" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
-  arn = var.sns_topic_arn
+  arn    = var.sns_topic_arn
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
 }
 
 resource "aws_cloudwatch_log_group" "log_group_default" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
-  name = "${var.cloudtrail_name}_default_log_group_${var.bucket_account_id}"
+  name              = "${var.cloudtrail_name}_default_log_group_${var.bucket_account_id}"
   retention_in_days = var.logs_retencion_days
-  tags = var.required_tags
+  tags              = var.required_tags
 }
 
 resource "aws_iam_role" "cloudtrail_role" {

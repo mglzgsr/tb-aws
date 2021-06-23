@@ -3,22 +3,22 @@
 
 variable "config_tags" {
   description = "Required TAGS"
-  default = {} 
+  default     = {}
 }
 
 variable "config_name" {
   description = "Name of Config Service"
-  default = ""
+  default     = ""
 }
 
 variable "region" {
   description = "Region to be attached to Authorization"
-  default = ""
+  default     = ""
 }
 
 variable "authorization_account_id" {
   description = "Authorization Account ID - Required"
-  default = ""
+  default     = ""
 }
 
 variable "aggregate_organization" {

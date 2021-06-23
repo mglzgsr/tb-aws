@@ -12,31 +12,31 @@ data "aws_iam_policy_document" "cloudtrail_assume_policy" {
 
 data "aws_iam_policy_document" "cloudtrail_cloudwatch_policy" {
   statement {
-    sid = "AWSCloudTrailLogging"
+    sid       = "AWSCloudTrailLogging"
     effect    = "Allow"
-    actions   = ["logs:CreateLogStream","logs:PutLogEvents"]
+    actions   = ["logs:CreateLogStream", "logs:PutLogEvents"]
     resources = ["arn:aws:logs:${var.region}:${var.bucket_account_id}:log-group:*:log-stream:*"]
   }
 }
 
 data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
   statement {
-    sid = "AWSLZCloudTrailSNSPolicy"
+    sid    = "AWSLZCloudTrailSNSPolicy"
     effect = "Allow"
     principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
     }
     actions = ["SNS:GetTopicAttributes",
-               "SNS:SetTopicAttributes",
-               "SNS:AddPermission",
-               "SNS:RemovePermission",
-               "SNS:DeleteTopic",
-               "SNS:Subscribe",
-               "SNS:ListSubscriptionsByTopic",
-               "SNS:Publish",
-               "SNS:Receive",
-              ]
+      "SNS:SetTopicAttributes",
+      "SNS:AddPermission",
+      "SNS:RemovePermission",
+      "SNS:DeleteTopic",
+      "SNS:Subscribe",
+      "SNS:ListSubscriptionsByTopic",
+      "SNS:Publish",
+      "SNS:Receive",
+    ]
     resources = [var.sns_topic_arn]
     condition {
       test     = "StringEquals"
