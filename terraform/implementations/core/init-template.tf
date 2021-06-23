@@ -71,8 +71,8 @@ provider "aws" {
 terraform {
   required_version = ">= 0.12.20"
   backend "s3" {
-    bucket         = "control-terraform-states-aws-lz-v01123"
-    key            = "terraform/terraform.tfstate"
+    bucket = "control-terraform-states-aws-lz-v01123"
+    key    = "terraform/terraform.tfstate"
     region = "us-west-2"
   }
 }
