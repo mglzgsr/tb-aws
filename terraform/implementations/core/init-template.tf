@@ -11,10 +11,12 @@ locals {
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
 }
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
   alias   = "sandbox-account-2"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox_prod.account_id}:role/${var.org_admin_role}"
@@ -23,6 +25,7 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
   alias   = "sandbox-account"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox.account_id}:role/${var.org_admin_role}"
@@ -31,6 +34,7 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
   alias   = "security-account"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_security.account_id}:role/${var.org_admin_role}"
@@ -39,6 +43,7 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
   alias   = "logarchive-account"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_logarchive.account_id}:role/${var.org_admin_role}"
@@ -47,6 +52,7 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
   alias   = "sharedservices-account"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_sharedservices.account_id}:role/${var.org_admin_role}"
@@ -55,6 +61,7 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.48"
+  region  = "us-west-2"
   alias   = "network-account"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_network.account_id}:role/${var.org_admin_role}"
