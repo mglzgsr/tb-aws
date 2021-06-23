@@ -10,12 +10,12 @@ locals {
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
   alias   = "sandbox-account-2"
   assume_role {
@@ -24,7 +24,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
   alias   = "sandbox-account"
   assume_role {
@@ -33,7 +33,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
   alias   = "security-account"
   assume_role {
@@ -42,7 +42,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
   alias   = "logarchive-account"
   assume_role {
@@ -51,7 +51,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
   alias   = "sharedservices-account"
   assume_role {
@@ -60,7 +60,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  version = "~> 2.48"
+  version = ">= 2.48"
   region  = "us-west-2"
   alias   = "network-account"
   assume_role {
@@ -78,9 +78,9 @@ terraform {
 }
 
 provider "local" {
-  version = "~> 1.4"
+  version = ">= 1.4"
 }
 
 provider "null" {
-  version = "~> 2.1"
+  version = ">= 2.1"
 }
