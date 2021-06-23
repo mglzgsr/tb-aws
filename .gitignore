@@ -8,3 +8,4 @@ terraform/variables.tf
 .vscode/settings.json
 /.idea/*
 .terraform.lock.hcl
+terraform/*.plan
