@@ -24,12 +24,12 @@ variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"
 }
-/*
 variable "account_role_name" {
   description = "Role for network account"
   default = "AWSLZCoreOUAdminRole"
 }
 
+/*
 
 variable "account_id" {
   description = "Account ID"
