@@ -1,4 +1,5 @@
 locals {
+  // coalescelist takes any number of list arguments and returns the first one that isn't empty.
   policy_id = coalescelist(aws_organizations_policy.aws_lz_policy.*.id, [var.policy_id])
 }
 
